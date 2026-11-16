@@ -1,0 +1,18 @@
+# --- Backend / API ---
+fastapi
+uvicorn[standard]
+python-multipart  # recibir archivos en FastAPI
+
+# --- Modelo (PyTorch) ---
+# Para usar la GPU NVIDIA instala torch desde el índice de CUDA:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+torch
+torchvision
+Pillow
+
+# --- Notebook de entrenamiento ---
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn

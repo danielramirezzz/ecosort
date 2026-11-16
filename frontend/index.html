@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EcoSort · Waste Classification</title>
+  <meta name="description" content="Upload a photo of a piece of waste and a neural network tells you whether it is organic, recyclable or non-recyclable.">
+
+  <!-- Tipografía Inter (sustituto de Wise Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Hoja de estilos de la página -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Mapa de importación: le dice al navegador de dónde descargar Three.js (librería 3D) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- ===== Íconos SVG reutilizables (se usan con <use href="#i-...">) ===== -->
+  <svg width="0" height="0" class="sr-only" aria-hidden="true">
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
+    <symbol id="i-recycle" viewBox="0 0 24 24"><path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/><path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/><path d="m14 16-3 3 3 3"/><path d="M8.293 13.596 7.196 9.5 3.1 10.598"/><path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/><path d="m13.378 9.633 4.096 1.098 1.097-4.096"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="i-clip" viewBox="0 0 24 24"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></symbol>
+    <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-4 0"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></symbol>
+  </svg>
+
+  <!-- ===== Barra de navegación ===== -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="#home" class="logo" aria-label="EcoSort, go to top">
+        <span class="logo__mark"><svg class="icon"><use href="#i-leaf"/></svg></span>
+        EcoSort
+      </a>
+      <nav aria-label="Sections">
+        <ul class="nav__links">
+          <li><a href="#classify">Classify</a></li>
+          <li><a href="#bins">Bins</a></li>
+          <li><a href="#assistant">Assistant</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+        </ul>
+      </nav>
+      <a href="#classify" class="btn btn--outline btn--sm">Try it now</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hero: titular principal y llamado a la acción ===== -->
+    <section id="home" class="hero">
+      <div class="container hero__inner">
+        <span class="badge">Intelligent Systems · Project</span>
+        <h1 class="display">Sort your waste in one click</h1>
+        <p class="hero__lead">
+          Upload a photo of any piece of waste and a convolutional neural network tells you whether it is
+          <strong>organic</strong>, <strong>recyclable</strong> or <strong>non-recyclable</strong>.
+        </p>
+        <div class="hero__actions">
+          <a href="#classify" class="btn btn--primary">
+            <svg class="icon"><use href="#i-upload"/></svg> Upload an image
+          </a>
+          <a href="#how-it-works" class="link">How does it work?</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Clasificador: zona de carga (izquierda) + resultado (derecha) ===== -->
+    <section id="classify" class="section section--fog">
+      <div class="container">
+        <h2 class="heading">Classifier</h2>
+        <p class="section__lead">JPG, PNG or WEBP up to 10 MB. On your phone you can take the picture directly.</p>
+
+        <div class="classifier">
+          <!-- Zona de carga: es un <label> para que funcione con clic, teclado y arrastrar/soltar -->
+          <label class="dropzone" id="dropzone" for="file-input">
+            <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" class="sr-only">
+            <!-- Estado vacío -->
+            <div class="dropzone__empty" id="dropzone-empty">
+              <span class="dropzone__icon"><svg class="icon icon--lg"><use href="#i-upload"/></svg></span>
+              <span class="dropzone__title">Drop an image here</span>
+              <span class="dropzone__hint">or <u>click to choose a file</u></span>
+            </div>
+            <!-- Vista previa de la imagen elegida -->
+            <img class="dropzone__preview" id="preview" alt="Preview of the image to classify" hidden>
+          </label>
+
+          <!-- Panel de resultado: aria-live anuncia los cambios a lectores de pantalla -->
+          <div class="result" id="result" aria-live="polite" aria-busy="false">
+            <!-- Estado inicial -->
+            <div class="result__state" id="state-idle">
+              <p class="result__placeholder">The result will appear here once you upload an image.</p>
+            </div>
+
+            <!-- Estado de carga (esqueleto) -->
+            <div class="result__state" id="state-loading" hidden>
+              <div class="skeleton skeleton--badge"></div>
+              <div class="skeleton skeleton--title"></div>
+              <div class="skeleton skeleton--bar"></div>
+              <div class="skeleton skeleton--bar"></div>
+              <p class="result__hint">Analyzing the image…</p>
+            </div>
+
+            <!-- Estado de error -->
+            <div class="result__state" id="state-error" hidden>
+              <p class="result__error"><svg class="icon"><use href="#i-alert"/></svg> <span id="error-text"></span></p>
+            </div>
+
+            <!-- Estado con la predicción -->
+            <div class="result__state" id="state-done" hidden>
+              <div class="result__head">
+                <span class="result__icon" id="result-icon"><svg class="icon icon--lg"><use href="#i-leaf"/></svg></span>
+                <div>
+                  <span class="result__kicker">Result</span>
+                  <p class="result__label" id="result-label">—</p>
+                </div>
+              </div>
+
+              <p class="result__bin" id="result-bin"></p>
+
+              <!-- Confianza del modelo comparada con el umbral -->
+              <div class="meter">
+                <div class="meter__row">
+                  <span>Model confidence</span>
+                  <strong id="result-confidence">0%</strong>
+                </div>
+                <div class="meter__track">
+                  <div class="meter__fill" id="confidence-fill"></div>
+                  <div class="meter__threshold" id="threshold-mark" title="Threshold"></div>
+                </div>
+                <p class="meter__note" id="threshold-note"></p>
+              </div>
+
+              <!-- Probabilidad de cada clase -->
+              <ul class="probs" id="probs"></ul>
+
+              <button type="button" class="btn btn--outline" id="reset-btn">
+                <svg class="icon"><use href="#i-reset"/></svg> Classify another image
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Las tres canecas en 3D (código de colores de Colombia, Resolución 2184 de 2019) ===== -->
+    <section id="bins" class="section">
+      <div class="container">
+        <h2 class="heading">Which bin does it go in?</h2>
+        <p class="section__lead">In Colombia, waste is sorted into three colored bins.</p>
+        <p class="bins__hint"><svg class="icon"><use href="#i-hand"/></svg> Press and drag a bin to spin it</p>
+
+        <div class="features">
+          <!-- Cada tarjeta tiene un lienzo 3D (data-bin indica el color). Si el 3D no carga, se ve el ícono SVG. -->
+          <article class="feature">
+            <div class="bin3d" data-bin="organic" role="img" aria-label="3D green bin for organic waste. Drag to rotate.">
+              <span class="feature__icon feature__icon--organic bin3d__fallback"><svg class="icon"><use href="#i-leaf"/></svg></span>
+            </div>
+            <h3>Organic · green bin</h3>
+            <p>Food scraps, fruit and vegetable peels, garden waste.</p>
+          </article>
+          <article class="feature">
+            <div class="bin3d" data-bin="recyclable" role="img" aria-label="3D white bin for recyclable waste. Drag to rotate.">
+              <span class="feature__icon feature__icon--recyclable bin3d__fallback"><svg class="icon"><use href="#i-recycle"/></svg></span>
+            </div>
+            <h3>Recyclable · white bin</h3>
+            <p>Clean and dry plastic, glass, metal, paper and cardboard.</p>
+          </article>
+          <article class="feature">
+            <div class="bin3d" data-bin="non_recyclable" role="img" aria-label="3D black bin for non-recyclable waste. Drag to rotate.">
+              <span class="feature__icon feature__icon--non bin3d__fallback"><svg class="icon"><use href="#i-trash"/></svg></span>
+            </div>
+            <h3>Non-recyclable · black bin</h3>
+            <p>Used toilet paper and napkins, face masks, cigarette butts and worn-out clothes. Batteries, phones and electronics go to a take-back collection point.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Cómo funciona: sección oscura con los pasos y las métricas ===== -->
+    <!-- ===== Asistente: chat con Ollama que usa las herramientas del servidor MCP ===== -->
+    <section id="assistant" class="section section--fog">
+      <div class="container">
+        <h2 class="heading">Ask the assistant</h2>
+        <p class="section__lead">Chat with a local AI model (Ollama, qwen2.5) connected to EcoSort through an MCP server. Ask where something goes, or attach a photo.</p>
+
+        <div class="chat">
+          <!-- Mensajes de la conversación; aria-live anuncia las respuestas nuevas -->
+          <div class="chat__messages" id="chat-messages" aria-live="polite">
+            <div class="msg msg--bot">
+              <p>Hi! I'm the EcoSort assistant. Ask me where any item goes, or attach a photo and I'll classify it with the EcoSort model.</p>
+            </div>
+          </div>
+
+          <!-- Preguntas sugeridas -->
+          <div class="chat__suggestions" id="chat-suggestions">
+            <button type="button" class="chip">Where do banana peels go?</button>
+            <button type="button" class="chip">What do I do with an old phone?</button>
+            <button type="button" class="chip">How accurate is the model?</button>
+          </div>
+
+          <!-- Vista previa de la foto adjunta -->
+          <div class="chat__attachment" id="chat-attachment" hidden>
+            <img id="chat-attachment-img" alt="Attached photo">
+            <span id="chat-attachment-name"></span>
+            <button type="button" class="chat__remove" id="chat-attachment-remove" aria-label="Remove photo">×</button>
+          </div>
+
+          <!-- Formulario para escribir y adjuntar -->
+          <form class="chat__form" id="chat-form">
+            <label class="chat__attach" for="chat-file" title="Attach a photo">
+              <svg class="icon"><use href="#i-clip"/></svg>
+              <span class="sr-only">Attach a photo</span>
+            </label>
+            <input type="file" id="chat-file" accept="image/jpeg,image/png,image/webp" class="sr-only">
+            <input type="text" id="chat-input" class="chat__input" placeholder="Where does a battery go?" autocomplete="off" aria-label="Message">
+            <button type="submit" class="btn btn--primary chat__send" id="chat-send">
+              <svg class="icon"><use href="#i-send"/></svg><span class="sr-only">Send</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="section section--dark">
+      <div class="container">
+        <h2 class="display display--md">How it works</h2>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step__num">01</span>
+            <h3>You upload a photo</h3>
+            <p>The image is sent from this page to the server (FastAPI).</p>
+          </li>
+          <li class="step">
+            <span class="step__num">02</span>
+            <h3>Preprocessing</h3>
+            <p>It is resized to 224×224 pixels and normalized with the ImageNet values.</p>
+          </li>
+          <li class="step">
+            <span class="step__num">03</span>
+            <h3>Neural network</h3>
+            <p>EfficientNet-B0 with transfer learning computes the probability of organic, recyclable and non-recyclable.</p>
+          </li>
+          <li class="step">
+            <span class="step__num">04</span>
+            <h3>Confidence threshold</h3>
+            <p>If the confidence is below <strong id="threshold-text">—</strong>, the model is unsure and the item is treated as non-recyclable to be safe.</p>
+          </li>
+        </ol>
+
+        <!-- Métricas reales del modelo (se cargan desde /api/info) -->
+        <div class="metrics" id="metrics">
+          <div class="metric"><span class="metric__value" id="m-acc">—</span><span class="metric__label">Accuracy</span></div>
+          <div class="metric"><span class="metric__value" id="m-bal">—</span><span class="metric__label">Balanced accuracy</span></div>
+          <div class="metric"><span class="metric__value" id="m-f1">—</span><span class="metric__label">Macro F1</span></div>
+          <div class="metric"><span class="metric__value" id="m-total">—</span><span class="metric__label">Images in the dataset</span></div>
+        </div>
+        <p class="metrics__note">Metrics measured on <span id="m-test">—</span> test images the model never saw.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Pie de página ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span class="logo logo--sm">
+        <span class="logo__mark"><svg class="icon"><use href="#i-leaf"/></svg></span>
+        EcoSort
+      </span>
+      <p>Universidad de Ibagué · Intelligent Systems · 2026</p>
+    </div>
+    <!-- Créditos de los datasets usados para entrenar (RealWaste exige atribución por su licencia CC BY 4.0) -->
+    <div class="container footer__credits">
+      <p>
+        Training data: Waste Classification Dataset and Garbage Classification (Kaggle);
+        <a href="https://github.com/nikhilvenkatkumsetty/TrashBox">TrashBox</a> (Kumsetty et al., 2022);
+        <a href="https://archive.ics.uci.edu/dataset/908/realwaste">RealWaste</a> (Single et al., 2023, CC BY 4.0);
+        <a href="https://github.com/garythung/trashnet">TrashNet</a> (Thung &amp; Yang, 2016, MIT).
+      </p>
+    </div>
+  </footer>
+
+  <!-- Lógica del clasificador -->
+  <script src="js/app.js"></script>
+  <!-- Chat con el asistente (Ollama + MCP) -->
+  <script src="js/chat.js"></script>
+  <!-- Canecas en 3D (módulo de JavaScript que importa Three.js) -->
+  <script type="module" src="js/canecas3d.js"></script>
+</body>
+</html>

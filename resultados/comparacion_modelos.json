@@ -1,0 +1,444 @@
+{
+  "resultados": {
+    "CNN desde cero": {
+      "accuracy": 0.7663831915957979,
+      "balanced_accuracy": 0.7555796122548518,
+      "macro_f1": 0.7451469596238578,
+      "recall_por_clase": {
+        "Non-recyclable": 0.6840816326530612,
+        "Organic": 0.8960417572857764,
+        "Recyclable": 0.6866154468257177
+      },
+      "objetos": {
+        "Batteries": 0.7323943661971831,
+        "Cell phones": 0.8787878787878788,
+        "Face masks": 0.5914634146341463,
+        "Cigarette butts": 0.9344262295081968,
+        "Cardboard (TrashBox)": 0.8222222222222222
+      },
+      "confusion_matrix": [
+        [
+          838,
+          82,
+          305
+        ],
+        [
+          128,
+          2060,
+          111
+        ],
+        [
+          532,
+          243,
+          1698
+        ]
+      ],
+      "parametros_M": 0.456451,
+      "tiempo_entrenamiento_min": 21.276157422860464,
+      "epocas": 18,
+      "inferencia_gpu_ms": 1.6933280000012019,
+      "inferencia_cpu_ms": 17.548170000009122
+    },
+    "MobileNetV3-Large": {
+      "accuracy": 0.9488077372019343,
+      "balanced_accuracy": 0.9481190411285306,
+      "macro_f1": 0.9467818917224332,
+      "recall_por_clase": {
+        "Non-recyclable": 0.9444897959183673,
+        "Organic": 0.9504132231404959,
+        "Recyclable": 0.9494541043267287
+      },
+      "objetos": {
+        "Batteries": 0.9295774647887324,
+        "Cell phones": 1.0,
+        "Face masks": 0.9146341463414634,
+        "Cigarette butts": 0.9836065573770492,
+        "Cardboard (TrashBox)": 0.7555555555555555
+      },
+      "confusion_matrix": [
+        [
+          1157,
+          12,
+          56
+        ],
+        [
+          19,
+          2185,
+          95
+        ],
+        [
+          75,
+          50,
+          2348
+        ]
+      ],
+      "parametros_M": 4.205875,
+      "tiempo_entrenamiento_min": 167.5863548398018,
+      "epocas": 15,
+      "inferencia_gpu_ms": 18.156306999990193,
+      "inferencia_cpu_ms": 22.48493500001132
+    },
+    "ResNet-50": {
+      "accuracy": 0.9543104885776221,
+      "balanced_accuracy": 0.9558227502638985,
+      "macro_f1": 0.9523718104063564,
+      "recall_por_clase": {
+        "Non-recyclable": 0.9624489795918367,
+        "Organic": 0.9604175728577642,
+        "Recyclable": 0.9446016983420946
+      },
+      "objetos": {
+        "Batteries": 0.9788732394366197,
+        "Cell phones": 1.0,
+        "Face masks": 0.9512195121951219,
+        "Cigarette butts": 1.0,
+        "Cardboard (TrashBox)": 0.8666666666666667
+      },
+      "confusion_matrix": [
+        [
+          1179,
+          8,
+          38
+        ],
+        [
+          17,
+          2208,
+          74
+        ],
+        [
+          86,
+          51,
+          2336
+        ]
+      ],
+      "parametros_M": 23.514179,
+      "tiempo_entrenamiento_min": 386.3479435324669,
+      "epocas": 12,
+      "inferencia_gpu_ms": 17.655054999995627,
+      "inferencia_cpu_ms": 84.47589499992318
+    }
+  },
+  "historiales": {
+    "CNN desde cero": [
+      {
+        "fase": "completo",
+        "train_loss": 0.8571175556308273,
+        "val_loss": 0.7732447849545296,
+        "train_acc": 0.5911949685534591,
+        "val_acc": 0.6871769217942304
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.7876655141444394,
+        "val_loss": 0.8286595040606483,
+        "train_acc": 0.638543453401944,
+        "val_acc": 0.6398199099549775
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.75740811608736,
+        "val_loss": 0.7491012666152679,
+        "train_acc": 0.6624142367066895,
+        "val_acc": 0.6174754043688511
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.73629935715388,
+        "val_loss": 0.6941416008146043,
+        "train_acc": 0.6751000571755289,
+        "val_acc": 0.7395364348841087
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.7246755022468262,
+        "val_loss": 0.7177772480824878,
+        "train_acc": 0.6832475700400229,
+        "val_acc": 0.7331999332999833
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.7058925681484979,
+        "val_loss": 0.6564601751214288,
+        "train_acc": 0.6972555746140652,
+        "val_acc": 0.7015174253793564
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.701259070392879,
+        "val_loss": 0.7140882437539653,
+        "train_acc": 0.6995425957690109,
+        "val_acc": 0.6201434050358513
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.6860277862668788,
+        "val_loss": 0.6762079032278069,
+        "train_acc": 0.7058676386506575,
+        "val_acc": 0.7305319326329831
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.6799152331941124,
+        "val_loss": 0.7064041237304742,
+        "train_acc": 0.7102272727272727,
+        "val_acc": 0.6936801734200434
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.656143252767107,
+        "val_loss": 0.6309464209891169,
+        "train_acc": 0.7232704402515723,
+        "val_acc": 0.7610471902617976
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.6451005671554596,
+        "val_loss": 0.6073557962094305,
+        "train_acc": 0.726915380217267,
+        "val_acc": 0.7633816908454227
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.6320152852861045,
+        "val_loss": 0.6032635415814928,
+        "train_acc": 0.7370283018867925,
+        "val_acc": 0.768050692012673
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.628834548474994,
+        "val_loss": 0.6012564465783726,
+        "train_acc": 0.7356346483704974,
+        "val_acc": 0.7423711855927964
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.622162593542473,
+        "val_loss": 0.5853791138182407,
+        "train_acc": 0.7405660377358491,
+        "val_acc": 0.7665499416374854
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.6158848238577497,
+        "val_loss": 0.6008083427252522,
+        "train_acc": 0.7434605488850772,
+        "val_acc": 0.7718859429714857
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.613910369323689,
+        "val_loss": 0.6008932915989391,
+        "train_acc": 0.7456761006289309,
+        "val_acc": 0.7748874437218609
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.6092589661146723,
+        "val_loss": 0.602081487412172,
+        "train_acc": 0.7484991423670669,
+        "val_acc": 0.7447056861764215
+      },
+      {
+        "fase": "completo",
+        "train_loss": 0.5865866303137195,
+        "val_loss": 0.5858794206357985,
+        "train_acc": 0.7596841052029731,
+        "val_acc": 0.7792229448057362
+      }
+    ],
+    "MobileNetV3-Large": [
+      {
+        "fase": "cabeza",
+        "train_loss": 0.395357320126702,
+        "val_loss": 0.2936376470545043,
+        "train_acc": 0.8469839908519153,
+        "val_acc": 0.8866099716524929
+      },
+      {
+        "fase": "cabeza",
+        "train_loss": 0.2963691755762913,
+        "val_loss": 0.2573508026601077,
+        "train_acc": 0.8873284734133791,
+        "val_acc": 0.8979489744872436
+      },
+      {
+        "fase": "cabeza",
+        "train_loss": 0.2567989131666852,
+        "val_loss": 0.25562375336661824,
+        "train_acc": 0.9034448256146369,
+        "val_acc": 0.8997832249458062
+      },
+      {
+        "fase": "cabeza",
+        "train_loss": 0.22918230182719682,
+        "val_loss": 0.232061830658465,
+        "train_acc": 0.9128787878787878,
+        "val_acc": 0.9197932299483075
+      },
+      {
+        "fase": "cabeza",
+        "train_loss": 0.21733029363937825,
+        "val_loss": 0.22527182866021436,
+        "train_acc": 0.9182747284162378,
+        "val_acc": 0.9167917291979323
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.1651507404623814,
+        "val_loss": 0.17943033220689655,
+        "train_acc": 0.9390723270440252,
+        "val_acc": 0.9339669834917459
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.12144890341539258,
+        "val_loss": 0.1693162739783779,
+        "train_acc": 0.9544739851343625,
+        "val_acc": 0.9384692346173087
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.10123237070141348,
+        "val_loss": 0.17105892901919934,
+        "train_acc": 0.9618353344768439,
+        "val_acc": 0.9384692346173087
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.08542477979663954,
+        "val_loss": 0.17157292550894665,
+        "train_acc": 0.968732132647227,
+        "val_acc": 0.9411372352843088
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.06961711703998283,
+        "val_loss": 0.17523651787871736,
+        "train_acc": 0.9751286449399656,
+        "val_acc": 0.943471735867934
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.0545645275208066,
+        "val_loss": 0.16490664948955147,
+        "train_acc": 0.9804888507718696,
+        "val_acc": 0.9453059863264965
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.04830766417908287,
+        "val_loss": 0.16620148338435867,
+        "train_acc": 0.982275586049171,
+        "val_acc": 0.9483074870768717
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.04563756386194061,
+        "val_loss": 0.17021157483826363,
+        "train_acc": 0.9842409948542024,
+        "val_acc": 0.9486409871602468
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.04315510169821783,
+        "val_loss": 0.17111985110850936,
+        "train_acc": 0.9848484848484849,
+        "val_acc": 0.9478072369518092
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.03214512541868845,
+        "val_loss": 0.17200120510270997,
+        "train_acc": 0.9895297312750143,
+        "val_acc": 0.9474737368684342
+      }
+    ],
+    "ResNet-50": [
+      {
+        "fase": "cabeza",
+        "train_loss": 0.4239186475691351,
+        "val_loss": 0.2916121612703162,
+        "train_acc": 0.8466266437964551,
+        "val_acc": 0.9021177255294314
+      },
+      {
+        "fase": "cabeza",
+        "train_loss": 0.3291421255055259,
+        "val_loss": 0.26680831485675616,
+        "train_acc": 0.8795740423098913,
+        "val_acc": 0.9086209771552443
+      },
+      {
+        "fase": "cabeza",
+        "train_loss": 0.3174929748847868,
+        "val_loss": 0.2617945988485967,
+        "train_acc": 0.8842195540308748,
+        "val_acc": 0.9101217275304319
+      },
+      {
+        "fase": "cabeza",
+        "train_loss": 0.31164535209579153,
+        "val_loss": 0.2512342089640214,
+        "train_acc": 0.8826114922813036,
+        "val_acc": 0.9126229781557446
+      },
+      {
+        "fase": "cabeza",
+        "train_loss": 0.3049639257969278,
+        "val_loss": 0.24468628929240596,
+        "train_acc": 0.8848627787307033,
+        "val_acc": 0.9121227280306821
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.24164418436548518,
+        "val_loss": 0.16660463877055812,
+        "train_acc": 0.9120211549456833,
+        "val_acc": 0.9408037352009339
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.1463561176224955,
+        "val_loss": 0.1458247877646232,
+        "train_acc": 0.9467195540308748,
+        "val_acc": 0.9468067367016841
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.10296161311985834,
+        "val_loss": 0.13850952200597777,
+        "train_acc": 0.9621569468267581,
+        "val_acc": 0.9476404869101217
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.0816634814864639,
+        "val_loss": 0.1448576768100192,
+        "train_acc": 0.9704831332189823,
+        "val_acc": 0.9546439886609972
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.06520574964932233,
+        "val_loss": 0.147761702135004,
+        "train_acc": 0.9762006861063465,
+        "val_acc": 0.9528097382024345
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.051289960800038024,
+        "val_loss": 0.1558647469836552,
+        "train_acc": 0.9804531160663236,
+        "val_acc": 0.9554777388694348
+      },
+      {
+        "fase": "fine-tuning",
+        "train_loss": 0.036510192589454135,
+        "val_loss": 0.15164346883888144,
+        "train_acc": 0.9872784448256147,
+        "val_acc": 0.9558112389528097
+      }
+    ]
+  }
+}

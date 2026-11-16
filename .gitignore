@@ -1,0 +1,37 @@
+# Entorno de Python y archivos temporales
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.vscode/
+.idea/
+.env
+.env.*
+*.log
+output/
+output-*/
+uploads/
+uploads-*/
+
+# Datos de entrenamiento (pesan cientos de MB; se descargan aparte, ver README)
+datasets/
+datasets-*/
+
+# Pesos de la comparación de modelos (ResNet-50 pesa 94 MB) y modelo anterior de 2 clases
+resultados/pesos_comparacion/
+backend/modelo/anterior_2_clases/
+
+# Video: dependencias de Node, render final y música generada (se regeneran con npm/python)
+video/node_modules/
+video/out/
+video/public/music.wav
+
+# Archivos viejos de la plantilla del curso que ya no usa EcoSort
+app/
+ui/
+utils/
+models/
+launch/
+test_jupyte.ipynb
+notebooks/ANN.ipynb
+/__init__.py
