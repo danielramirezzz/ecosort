@@ -168,15 +168,20 @@ class AgenteMCP:
         self._cliente = None
         self._candado = threading.Lock()
 
-    def iniciar(self, espera=60):
-        """Arranca el hilo con la conexión MCP (solo la primera vez)."""
+    def iniciar(self, espera=90):
+        """Arranca el hilo con la conexión MCP (la primera vez, o de nuevo si la anterior falló)."""
         with self._candado:
+            if self._error:
+                # El intento anterior falló: se limpia el estado para volver a intentarlo
+                self._error, self._loop = None, None
+                self._listo.clear()
             if self._loop is None:
+                self._loop = "iniciando"
                 threading.Thread(target=self._hilo, daemon=True).start()
         if not self._listo.wait(espera):
-            raise RuntimeError("El servidor MCP no respondió a tiempo.")
+            raise RuntimeError("the MCP server did not start in time")
         if self._error:
-            raise RuntimeError(f"No se pudo iniciar el servidor MCP: {self._error}")
+            raise RuntimeError(f"the MCP server could not start: {self._error}")
 
     def _hilo(self):
         # En Windows se necesita un ProactorEventLoop para lanzar procesos hijos
