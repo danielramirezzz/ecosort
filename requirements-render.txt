@@ -1,0 +1,17 @@
+# Dependencias para el servidor en Render (solo lo necesario para la página, sin entrenamiento).
+# PyTorch se instala en su versión para CPU: Render no tiene GPU y así pesa mucho menos.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.14.1+cpu
+torchvision==0.29.1+cpu
+
+# Backend web
+fastapi
+uvicorn[standard]
+python-multipart
+pillow
+numpy
+
+# Asistente: servidor MCP y cliente de Ollama
+mcp
+ollama
+httpx

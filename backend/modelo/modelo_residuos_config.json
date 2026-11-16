@@ -1,0 +1,50 @@
+{
+  "architecture": "efficientnet_b0",
+  "classes": [
+    "Norecyclable",
+    "organic",
+    "recyclable"
+  ],
+  "labels_es": {
+    "Norecyclable": "No reciclable",
+    "organic": "Orgánico",
+    "recyclable": "Reciclable"
+  },
+  "categories": {
+    "organic": "organic",
+    "recyclable": "recyclable",
+    "Norecyclable": "non_recyclable"
+  },
+  "fallback_class": "Norecyclable",
+  "threshold": 0.6081178188323975,
+  "img_size": [
+    224,
+    224
+  ],
+  "mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "dataset": {
+    "total": 39978,
+    "train": 27984,
+    "val": 5997,
+    "test": 5997
+  },
+  "test_metrics": {
+    "accuracy": 0.9451392362848091,
+    "balanced_accuracy": 0.9456778580062473,
+    "macro_f1": 0.9419560545595923,
+    "recall_por_clase": {
+      "Norecyclable": 0.9469387755102041,
+      "organic": 0.9551979121357111,
+      "recyclable": 0.9348968863728265
+    }
+  }
+}

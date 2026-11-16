@@ -1,0 +1,21 @@
+# Render "Blueprint": Render lee este archivo y crea el servicio solo.
+services:
+  - type: web
+    name: ecosort
+    runtime: python
+    plan: free
+    region: oregon
+    buildCommand: pip install -r requirements-render.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/info
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.13.5"
+      # Asistente (opcional): Ollama Cloud. Sin estas variables la página funciona igual
+      # y solo el chat avisa que no está disponible.
+      - key: OLLAMA_HOST
+        value: https://ollama.com
+      - key: OLLAMA_MODEL # modelo de Ollama Cloud que soporta herramientas
+        value: gpt-oss:20b
+      - key: OLLAMA_API_KEY # secreta: la pegas en Render (se crea en ollama.com > Settings > Keys)
+        sync: false
