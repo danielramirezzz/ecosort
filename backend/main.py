@@ -114,8 +114,10 @@ def chat(
         idioma = detectar_idioma(mensaje) if mensaje.strip() else "en"
         respuesta, herramientas = agente.conversar(mensajes, idioma=idioma)
     except Exception as e:  # noqa: BLE001
-        logger.warning("Chat no disponible: %s", e)
-        raise HTTPException(status_code=503, detail="The AI assistant is not available. Is Ollama running?")
+        # Se registra y se muestra el motivo (sin datos secretos) para poder corregirlo
+        logger.exception("Chat no disponible")
+        motivo = f"{type(e).__name__}: {e}"[:300]
+        raise HTTPException(status_code=503, detail=f"The AI assistant is not available ({motivo}).")
 
     logger.info("chat -> %s", [h["herramienta"] for h in herramientas])
     # mensaje_usuario: lo que se guarda en el historial (incluye la ruta de la foto, si la hay)
