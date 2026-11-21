@@ -71,6 +71,10 @@ repository; download the datasets listed below into `datasets/waste_data/`.
 
 ## Datasets
 
+The combined dataset used to train EcoSort (one folder per class: `Norecyclable`, `organic`, `recyclable`) is on
+Google Drive: <https://drive.google.com/drive/folders/1v7R_sbWMUjD7KU4GaF-0x7TE9zGf1H_Y>. It was built from these
+public datasets:
+
 - Waste Classification Dataset (Kaggle)
 - Garbage Classification — 12 classes (Kaggle, mostafaabla)
 - TrashBox — N. V. Kumsetty et al., "TrashBox: Trash Detection and Classification using Quantum Transfer Learning", FRUCT 2022
