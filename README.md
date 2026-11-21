@@ -4,6 +4,8 @@ Upload a photo of a piece of waste and the model (EfficientNet-B0 with transfer 
 **Organic**, **Recyclable** or **Non-recyclable**, following Colombia's bin color code (Resolución 2184 de 2019).
 The page also includes an **AI assistant** (Ollama) that uses the classifier through an **MCP server**.
 
+**Promotional video (3 min):** <https://www.youtube.com/watch?v=ixV6FhaOu5I>
+
 ## Project structure
 
 ```
