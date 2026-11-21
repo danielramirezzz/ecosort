@@ -2,7 +2,7 @@
 #  Servidor MCP de EcoSort
 #  Expone el clasificador de residuos como herramientas que
 #  cualquier asistente de IA compatible con MCP puede usar
-#  (Ollama con chat_ollama.py, Claude Desktop, etc.).
+#  (por ejemplo, Ollama con chat_ollama.py o el chat de la página).
 #
 #  Herramientas:
 #   - clasificar_residuo(ruta_imagen): dice a qué caneca va un residuo

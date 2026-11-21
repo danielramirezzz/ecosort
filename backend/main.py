@@ -25,7 +25,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("ecosort")
 
 # Crea la aplicación web
-app = FastAPI(title="EcoSort API", description="Waste classification with a CNN")
+app = FastAPI(title="EcoSort API", description="EcoSort: waste classification for the Colombian three-bin system")
 
 # Carga el modelo una sola vez al iniciar el servidor (no en cada petición)
 clasificador = ClasificadorResiduos()

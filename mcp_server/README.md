@@ -41,9 +41,9 @@ The program starts the MCP server, gives its tools to the Ollama model (`qwen2.5
 model decides to use a tool, runs it on the MCP server and returns the result to the model. Lines that
 start with `[MCP]` show each tool call.
 
-## Use it from Claude Desktop (optional)
+## Use it from other MCP clients (optional)
 
-Add this to `claude_desktop_config.json` (adjust the paths):
+Any MCP-compatible client can start the server with a configuration like this (adjust the paths):
 
 ```json
 {

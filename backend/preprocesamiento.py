@@ -1,7 +1,7 @@
 # ============================================================
 #  Preprocesamiento de imágenes
 #  Convierte la imagen que sube el usuario al mismo formato
-#  que se usó durante el entrenamiento (notebooks/CNN_Waste.ipynb).
+#  que se usó durante el entrenamiento (notebooks/EcoSort_Training.ipynb).
 # ============================================================
 import io
 

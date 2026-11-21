@@ -1,4 +1,4 @@
-# EcoSort — Waste classification with a CNN
+# EcoSort — Intelligent waste sorting for the Colombian three-bin system
 
 Upload a photo of a piece of waste and the model (EfficientNet-B0 with transfer learning) classifies it as
 **Organic**, **Recyclable** or **Non-recyclable**, following Colombia's bin color code (Resolución 2184 de 2019).
@@ -25,7 +25,7 @@ NNApp-main/
 │   ├── agente.py             connects an Ollama model with the MCP server
 │   └── chat_ollama.py        terminal chat
 ├── notebooks/
-│   ├── CNN_Waste.ipynb       model training
+│   ├── EcoSort_Training.ipynb  model training
 │   └── Model_Comparison.ipynb  comparison of 4 architectures
 ├── video/                    promotional video (Remotion) and voice-over script
 ├── render.yaml               Render deployment (Blueprint)
@@ -66,7 +66,7 @@ Notes: the free plan has 512 MB of RAM and no GPU, so PyTorch is installed in it
 
 ## Retrain the model
 
-Run `notebooks/CNN_Waste.ipynb`. It saves the model files to `backend/modelo/`. The training images are not in the
+Run `notebooks/EcoSort_Training.ipynb`. It saves the model files to `backend/modelo/`. The training images are not in the
 repository; download the datasets listed below into `datasets/waste_data/`.
 
 ## Datasets
